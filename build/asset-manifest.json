@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/static/css/main.6839be9b.css",
+    "main.css": "/static/css/main.14886c8c.css",
     "main.js": "/static/js/main.b9776d1b.js",
     "static/media/DelaGothicOne-Regular.ttf": "/static/media/DelaGothicOne-Regular.a8761c8c6d54ccaa44db.ttf",
     "static/media/pricedown bl.otf": "/static/media/pricedown bl.6bea83af9fab92ca7c40.otf",
     "static/media/Chunk.otf": "/static/media/Chunk.a8cc7f720e2074ce84a6.otf",
     "index.html": "/index.html",
-    "main.6839be9b.css.map": "/static/css/main.6839be9b.css.map",
+    "main.14886c8c.css.map": "/static/css/main.14886c8c.css.map",
     "main.b9776d1b.js.map": "/static/js/main.b9776d1b.js.map"
   },
   "entrypoints": [
-    "static/css/main.6839be9b.css",
+    "static/css/main.14886c8c.css",
     "static/js/main.b9776d1b.js"
   ]
 }
