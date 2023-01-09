@@ -6,7 +6,11 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:ui": "rm -rf build && cd ../frontend && npm run build && mv -r build ../backend",
+    "deploy": "git add . && git commit -m 'committing changes' && git push heroku master",
+    "deploy:full": "npm run build:ui && npm run deploy"
+
   },
   "author": "",
   "license": "ISC",

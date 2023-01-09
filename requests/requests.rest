@@ -42,7 +42,7 @@ PUT http://localhost:3001/api/users/63b97be458f5617a91e91e99
 Content-Type: application/json
 
 {   
-    "balance": 10
+    "balance": 40
 }
 
 ###
