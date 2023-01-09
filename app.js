@@ -1,9 +1,12 @@
 const config = require("./utils/config")
 const middleware = require("./utils/middleware")
+const path = require("path")
 
 const express = require("express")
 
 const app = express()
+
+const appRouter = require("express").Router()
 
 const nodeCron = require("node-cron")
 const cors = require("cors")
@@ -26,6 +29,8 @@ mongoose.connect(config.MONGODB_URI)
 app.use(cors())
 app.use(express.json())
 app.use(express.static("build"))
+
+
 app.use(middleware.requestLogger)
 app.use(middleware.getToken)
 app.use(middleware.getUser)
@@ -33,6 +38,12 @@ app.use(middleware.getUser)
 app.use("/api/transactions", transactionRouter)
 app.use("/api/users", userRouter)
 app.use("/api/login", loginRouter)
+
+app.get("*", (request, response, next) => {
+    const filePath = path.join(__dirname, "build", "index.html")
+    console.log(filePath)
+    response.sendFile(filePath)
+})
 
 const job = nodeCron.schedule("0 0 * * * * *", 
                                 sendAllowance)

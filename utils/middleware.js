@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken")
 const config = require("./config")
 
+
 const requestLogger = (request, response, next) => {
     console.log("Method:", request.method)
     console.log("Path:", request.path)
@@ -12,6 +13,7 @@ const requestLogger = (request, response, next) => {
 const unKnownEndPoint = (request, response) => {
     response.status(404).send({error: "unknown endpoint"})
 }
+
 
 const getToken = (request, response, next) => {
     const authorization = request.get("authorization")
@@ -37,5 +39,5 @@ module.exports = {
     requestLogger,
     unKnownEndPoint,
     getToken,
-    getUser
+    getUser,
 }
