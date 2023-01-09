@@ -1,4 +1,5 @@
 const User = require("../models/user")
+const Transaction = require("../models/transactions")
 
 const sendAllowance = async () => {
 
@@ -9,11 +10,23 @@ const sendAllowance = async () => {
     for(user of users){
         let i = 0 
         console.log(`Executing users ${i} of ${users.length}`)
-        await User.findByIdAndUpdate(user.id, {
-            balance: Number(user.balance) + Number(user.allowance)
-        },
-        {new: true})
-        i += 1
+
+        const remainingBalance = Math.round((user.balance + user.allowance)*100)/100
+
+        const newTransaction = new Transaction({
+            reference: "Daily allowance",
+            date: new Date, 
+            amount: 10,
+            balanceRemaining: remainingBalance, 
+            user: user.id
+        })
+
+        const savedTransaction = await newTransaction.save()
+
+        user.transactions = user.transactions.concat(newTransaction)
+        user.balance = remainingBalance
+
+        await user.save()
     }
 
     console.log("task completed")

@@ -45,7 +45,7 @@ app.get("*", (request, response, next) => {
     response.sendFile(filePath)
 })
 
-const job = nodeCron.schedule("0 0 * * * * *", 
+const job = nodeCron.schedule("0 0 * * *", 
                                 sendAllowance)
 
 

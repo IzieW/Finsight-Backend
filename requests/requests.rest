@@ -20,7 +20,7 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:3001/api/users/63b42376c4ff8bf4b4152d11
+DELETE http://localhost:3001/api/users/63b9d2241bf3e986382ce341
 
 
 ###
@@ -38,11 +38,11 @@ DELETE http://localhost:3001/api/transactions/63b6e5145891ce37ef8ec8b8
 Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imtvb2t5a29vIiwiaWQiOiI2M2I2YTQ4NDkxYWQ5NGQxMzY5OTRjMTQiLCJpYXQiOjE2NzI5MTc0MjN9.907qPqFT-tAVLaRBPFSBCdZkK5BoyPeklPBvOm4Fzkg
 
 ###
-PUT http://localhost:3001/api/users/63b6a48491ad94d136994c14
+PUT http://localhost:3001/api/users/63b97be458f5617a91e91e99
 Content-Type: application/json
 
 {   
-    "balance": 15
+    "balance": 10
 }
 
 ###
