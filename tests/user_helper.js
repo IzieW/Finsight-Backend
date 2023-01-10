@@ -5,13 +5,15 @@ const initialUsers = [
         username: "test",
         name: "test",
         password: "testing123",
-        allowance: 10
+        allowance: 10,
+        balance: 10
     },
     {
         username: "test2",
         name: "test2",
         password: "testing234",
-        allowance: 20
+        allowance: 20,
+        balance: 10
     }
 
 ]

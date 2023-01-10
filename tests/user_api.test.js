@@ -14,8 +14,6 @@ beforeEach( async () => {
     await User.insertMany(helper.initialUsers)
 })
 
-
-
 describe("Calling users", () => {
     test("all users are returned as JSON", async ()=> {
         const response = await api

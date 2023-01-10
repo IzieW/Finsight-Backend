@@ -17,6 +17,12 @@ transactionRouter.get("/", async (request, response) => {
 transactionRouter.post("/", async (request, response) => {
     const body = request.body
 
+    if(!body.amount || isNaN(body.amount)){
+        return response.status(404).json({
+            error: "invalid transaction amount"
+        })
+    }
+
     console.log(request.user)
 
     if (!request.user){
@@ -26,6 +32,13 @@ transactionRouter.post("/", async (request, response) => {
     }
 
     const user = await User.findById(request.user.id)
+
+    if(!user){
+        return response.status(404).json({
+            error: "user not found"
+        })
+    }
+
 
 
     const remainingBalance = Math.round((user.balance+body.amount)*100)/100
@@ -50,8 +63,12 @@ transactionRouter.post("/", async (request, response) => {
 
 transactionRouter.delete("/:id", async (request, response) => {
     const transactionToDelete = await Transaction.findById(request.params.id)
-    console.log(transactionToDelete)
 
+    if(!transactionToDelete){
+        return response.status(404).json({
+            error: "transaction not found"
+        })
+    }
     if(!request.user || transactionToDelete.user.toString() !== request.user.id.toString()){
         return response.status(400).json({
             error: "Unauthorized Deletion"
@@ -66,9 +83,10 @@ transactionRouter.delete("/:id", async (request, response) => {
     await Transaction.findByIdAndDelete(request.params.id)
     console.log("content deleted")
 
+
     await User.findByIdAndUpdate(user.id, {
         balance: newBalance,
-        transactions: user.transactions.filter(n => n.id !== request.params.id)
+        transactions: user.transactions.filter(n => n.toString() !== request.params.id.toString())
     })
 
     console.log("new balance saved")

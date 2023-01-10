@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt")
 
 userRouter.get("/", async (request, response) => {
     const users = await User.find({})
-                        .populate("transactions", {
+                       .populate("transactions", {
                             reference: 1, 
                             amount: 1,
                             date: 1,
@@ -83,6 +83,7 @@ userRouter.put("/:id", async (request, response) => {
     if(!savedUser){
         return response.status(400).end()
     }
+    
     response.json(savedUser)
 
 })
