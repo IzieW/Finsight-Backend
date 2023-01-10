@@ -21,6 +21,7 @@ Content-Type: application/json
 
 ###
 DELETE http://localhost:3001/api/users/63bc1a3a26b164d97d2d3a4f
+DELETE http://localhost:3001/api/users/63b9d2241bf3e986382ce341
 
 
 ###
