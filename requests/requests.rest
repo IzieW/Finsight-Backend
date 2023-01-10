@@ -29,10 +29,8 @@ POST http://localhost:3001/api/users/
 Content-Type: application/json
 
 {
-    "username": "kookykoo",
     "name": "kooks",
-    "password": "kkoookal",
-    "allowance": 10
+    "password": "kkoookal"
 }
 ###
 DELETE http://localhost:3001/api/transactions/63b6e5145891ce37ef8ec8b8
@@ -50,8 +48,7 @@ Content-Type: application/json
 POST http://localhost:3001/api/login
 Content-Type: application/json
 
-{
-    "username": "kookykoo",
+{   "username": "kooks",
     "password": "kkoookal"
 }
 

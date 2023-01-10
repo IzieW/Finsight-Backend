@@ -21,6 +21,9 @@ userRouter.get("/:id", async (request, response) => {
                             date: 1,
                             balanceRemaining: 1
                         })
+    if (!user){
+        return response.status(404).end()
+    }
     response.json(user)
 })
 
@@ -31,6 +34,18 @@ userRouter.post("/", async (request, response) => {
     if (existingUser){
         return response.status(400).json({
             error: `the username ${username} already exists`
+        })
+    }
+
+    if(!username || !name || !password || !allowance) {
+        return response.status(400).json({
+            error: 'missing information'
+        })
+    }
+
+    if(isNaN(allowance)){
+        return response.status(400).json({
+            error: "daily allowance must be a number"
         })
     }
 
@@ -64,6 +79,10 @@ userRouter.put("/:id", async (request, response) => {
                     request.params.id,
                     request.body,
                     {new:true})
+
+    if(!savedUser){
+        return response.status(400).end()
+    }
     response.json(savedUser)
 
 })
