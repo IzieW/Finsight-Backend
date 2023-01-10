@@ -9,6 +9,12 @@ loginRouter.post("/", async (request, response) => {
 
     const {username, password} = request.body
 
+    if(!username || !password){
+        return response.status(404).json({
+            error: "missing username or password"
+        })
+    }
+
     const user = await User.findOne({username})
 
     console.log("User found")
