@@ -35,13 +35,13 @@ userRouter.post("/", async (request, response) => {
     });
   }
 
-  if (!username || !name || !password || !allowance) {
+  if (!username || !name || !password) {
     return response.status(400).json({
       error: "missing information",
     });
   }
 
-  if (isNaN(allowance)) {
+  if (allowance && isNaN(allowance)) {
     return response.status(400).json({
       error: "daily allowance must be a number",
     });
