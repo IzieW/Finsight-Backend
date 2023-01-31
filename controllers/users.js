@@ -1,6 +1,7 @@
 const userRouter = require("express").Router();
 const User = require("../models/user");
 const bcrypt = require("bcrypt");
+const Transaction = require("../models/transactions")
 
 userRouter.get("/", async (request, response) => {
   const users = await User.find({}).populate("transactions", {
@@ -41,12 +42,6 @@ userRouter.post("/", async (request, response) => {
     });
   }
 
-  if (allowance && isNaN(allowance)) {
-    return response.status(400).json({
-      error: "daily allowance must be a number",
-    });
-  }
-
   const saltRounds = 10;
   const passwordHash = await bcrypt.hash(password, saltRounds);
 
@@ -55,12 +50,31 @@ userRouter.post("/", async (request, response) => {
     name,
     passwordHash,
     date: new Date(),
-    balance: allowance,
-    allowance,
+    balance: 0,
+    allowance
   });
 
   const savedUser = await newUser.save();
+
+    // Send first allowance
+    console.log("dealing with new user!")
+  console.log(newUser.id)
+
+  const dailyAllowance = new Transaction({
+    reference: "Daily Allowance",
+    date: new Date, 
+    amount: allowance, 
+    balanceRemaining: allowance,
+    user: newUser.id
+  })
+
+  const savedTransaction = await dailyAllowance.save()
+  newUser.transactions = newUser.transactions.concat(dailyAllowance._id)
+  newUser.balance = dailyAllowance.balanceRemaining
+  await newUser.save()
+
   response.json(savedUser);
+
 });
 
 userRouter.delete("/:id", async (request, response) => {
