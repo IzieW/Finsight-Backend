@@ -42,6 +42,12 @@ userRouter.post("/", async (request, response) => {
     });
   }
 
+  if(allowance && isNaN(allowance)){
+    return response.status(400).json({
+      error: "allowance must be a number"
+    })
+  }
+
   const saltRounds = 10;
   const passwordHash = await bcrypt.hash(password, saltRounds);
 
