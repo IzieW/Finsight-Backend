@@ -1,7 +1,7 @@
 const userRouter = require("express").Router();
 const User = require("../models/user");
 const bcrypt = require("bcrypt");
-const Transaction = require("../models/transactions")
+const Transaction = require("../models/transactions");
 
 userRouter.get("/", async (request, response) => {
   const users = await User.find({}).populate("transactions", {
@@ -42,10 +42,10 @@ userRouter.post("/", async (request, response) => {
     });
   }
 
-  if(allowance && isNaN(allowance)){
+  if (allowance && isNaN(allowance)) {
     return response.status(400).json({
-      error: "allowance must be a number"
-    })
+      error: "allowance must be a number",
+    });
   }
 
   const saltRounds = 10;
@@ -57,30 +57,29 @@ userRouter.post("/", async (request, response) => {
     passwordHash,
     date: new Date(),
     balance: 0,
-    allowance
+    allowance,
   });
 
   const savedUser = await newUser.save();
 
-    // Send first allowance
-    console.log("dealing with new user!")
-  console.log(newUser.id)
+  // Send first allowance
+  console.log("dealing with new user!");
+  console.log(newUser.id);
 
   const dailyAllowance = new Transaction({
     reference: "Daily Allowance",
-    date: new Date, 
-    amount: allowance, 
+    date: new Date(),
+    amount: allowance,
     balanceRemaining: allowance,
-    user: newUser.id
-  })
+    user: newUser.id,
+  });
 
-  const savedTransaction = await dailyAllowance.save()
-  newUser.transactions = newUser.transactions.concat(dailyAllowance._id)
-  newUser.balance = dailyAllowance.balanceRemaining
-  await newUser.save()
+  const savedTransaction = await dailyAllowance.save();
+  newUser.transactions = newUser.transactions.concat(dailyAllowance._id);
+  newUser.balance = dailyAllowance.balanceRemaining;
+  await newUser.save();
 
   response.json(savedUser);
-
 });
 
 userRouter.delete("/:id", async (request, response) => {

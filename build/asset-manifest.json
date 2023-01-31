@@ -9,8 +9,5 @@
     "main.6c29fa20.css.map": "/static/css/main.6c29fa20.css.map",
     "main.3b253c4f.js.map": "/static/js/main.3b253c4f.js.map"
   },
-  "entrypoints": [
-    "static/css/main.6c29fa20.css",
-    "static/js/main.3b253c4f.js"
-  ]
+  "entrypoints": ["static/css/main.6c29fa20.css", "static/js/main.3b253c4f.js"]
 }
